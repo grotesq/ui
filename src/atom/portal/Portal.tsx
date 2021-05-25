@@ -12,7 +12,7 @@ export const Portal = ({
 
   return (
     <>
-      {portal.children.map((Component: any) => (
+      {portal.children.map(Component => (
         Component
       ))}
     </>
