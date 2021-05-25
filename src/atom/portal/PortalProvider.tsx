@@ -47,7 +47,9 @@ export const PortalProvider = ({
           setPortals({ ...portals });
         },
         removeChild: (name: string, children: React.ReactNode) => {
-
+          if (!portals[name]) return;
+          portals[name].children = portals[name].children.filter(x => x !== children);
+          setPortals({ ...portals });
         },
       }}
     >
