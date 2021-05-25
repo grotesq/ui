@@ -70,3 +70,15 @@ will be rendered as:
   </Modal>
 </Debounce>
 ```
+
+__predicate__<br/>
+Only `true -> false` transitions will be debounced. <br/>
+`false -> true` is immediate.
+```tsx
+<Debounce
+  property="visible"
+  duration={1000}
+  predicate={x => !x}
+>
+</Debounce>
+```
