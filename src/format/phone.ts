@@ -11,8 +11,7 @@ export const formatPhone = (x: string) => {
       return x.substr(0, 2) + '-' + x.substr(2, 3) + '-' + x.substr(5);
     if (len <= 10)
       return x.substr(0, 2) + '-' + x.substr(2, 4) + '-' + x.substr(6);
-  }
-  else {
+  } else {
     if (len <= 4)
       return x;
     if (len <= 6)
