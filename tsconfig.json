@@ -3,9 +3,9 @@
   "compilerOptions": {
     "strict": true,
     "noImplicitAny": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "atom/*": ["./src/atom/*"]
+      "*": ["src/*"],
     }
   }
 }

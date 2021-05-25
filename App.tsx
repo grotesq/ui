@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { FAB } from './src/atom/fab';
-import { Portal, PortalProvider, WarpTo } from './src/atom/portal';
+import { FAB } from 'atom/fab';
+import { Portal, PortalProvider, WarpTo } from 'atom/portal';
 
 export default function App() {
   return (
