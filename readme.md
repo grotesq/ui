@@ -55,3 +55,18 @@ will be rendered as:
   </Text>
 </Portal>
 ```
+
+#### Debounce
+
+```tsx
+<Debounce
+  property="visible"
+  duration={1000}
+>
+  <Modal visible={visible}>
+    <Text>
+      Henlo World!
+    </Text>
+  </Modal>
+</Debounce>
+```
