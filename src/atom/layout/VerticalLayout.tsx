@@ -23,7 +23,7 @@ export const VerticalLayout = ({
 const Container = styled.View<Partial<VerticalLayoutProps>>`
   flex-direction: column;
 
-  ${({ fill }) => fill ? `
+  ${({ fill }: VerticalLayoutProps) => fill ? `
     flex: 1;
   ` : `
   `}

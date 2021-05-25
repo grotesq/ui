@@ -4,3 +4,5 @@ declare const DefaultFormatter: ValueFormatter<any> = (x: any) => `${x ? x : ''}
 
 declare type OnChangeCallback<T = any> = (x: T) => void;
 declare type OnPressCallback = () => void;
+
+declare type Validator<T = any> = (x: T) => string | null;

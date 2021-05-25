@@ -23,7 +23,7 @@ export const HorizontalLayout = ({
 const Container = styled.View<Partial<HorizontalLayoutProps>>`
   flex-direction: row;
 
-  ${({ fill }) => fill ? `
+  ${({ fill }: HorizontalLayoutProps) => fill ? `
     flex: 1;
   ` : `
   `}
