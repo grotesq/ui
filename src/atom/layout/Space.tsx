@@ -2,15 +2,17 @@ import React from 'react';
 import { View } from 'react-native';
 
 type SpaceProps = {
-  size?: number;
+  width?: number;
+  height?: number;
 };
 export const Space = ({
-  size,
+  width = 1,
+  height = 1,
   ...props
 }: SpaceProps) => {
   return (
     <View
-      style={{ width: size, height: size }}
+      style={{ width, height }}
       {...props}
     />
   );
