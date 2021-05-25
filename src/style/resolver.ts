@@ -4,7 +4,7 @@ const resolveUnit = (value: number | string) => {
   if (typeof value === 'string')
     return `${value}`;
 };
-export const resolvePadding = (padding: Padding) => {
+export const resolvePadding = (padding: Padding | undefined) => {
   if (!padding) return '';
 
   if (typeof padding === 'number')
@@ -19,7 +19,7 @@ export const resolvePadding = (padding: Padding) => {
     ${padding.left ? `padding-left: ${resolveUnit(padding.left)}` : ''}
   `;
 };
-export const resolveMargin = (margin: Margin) => {
+export const resolveMargin = (margin: Margin | undefined) => {
   if (!margin) return '';
 
   if (typeof margin === 'number')

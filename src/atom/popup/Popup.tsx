@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled/styled';
-import { Modal } from 'react-native';
+import { Modal, ModalProps } from 'react-native';
 
 import { resolvePadding } from 'style';
 
 type PopupProps = {
   padding?: Padding;
+  modalProps?: ModalProps;
   children: React.ReactNode;
   onClose: () => void;
 };
 export const Popup = ({
   padding,
+  modalProps = {},
   children,
   onClose = () => {},
   ...props
@@ -19,6 +21,7 @@ export const Popup = ({
     <Modal
       transparent
       onRequestClose={onClose}
+      {...modalProps}
     >
       <Container
         padding={padding}
@@ -31,5 +34,5 @@ export const Popup = ({
 };
 
 const Container = styled.View`
-  ${({ padding }) => resolvePadding(padding)}
+  ${({ padding }: PopupProps) => resolvePadding(padding)}
 `;
