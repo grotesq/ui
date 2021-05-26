@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled/styled';
 import { Animated, View } from 'react-native';
-import { Space } from 'atom/layout';
 import { Easing } from 'react-native-reanimated';
+
+import { Space } from 'atom/layout';
 
 interface VerticalPickerProps {
   items: LabelValue[];
@@ -62,36 +63,40 @@ export const VerticalPicker = ({
     }
     return offset;
   };
+  const snap = () => {
+    ref.current.scrollTo({
+      x: 0,
+      y: getScrollOffset(activeItemIndex.current),
+      animated: true,
+    });
+  };
   const onScroll = ({ nativeEvent }) => {
     const idx = getActiveItem(nativeEvent.contentOffset.y);
+    const delta = Math.abs(nativeEvent.contentOffset.y - lastStop.current);
+    lastStop.current = nativeEvent.contentOffset.y;
 
     if (activeItemIndex.current !== idx) {
-      const prevIdx = activeItemIndex.current;
       activeItemIndex.current = idx;
-      lastStop.current = nativeEvent.contentOffset.y;
 
       const animations: Animated.CompositeAnimation[] = [];
-
-      for (let i=Math.max(0, idx-2);i<Math.min(items.length, idx+3);i++){
-        const distance = Math.abs(idx - i);
+      for (let i=Math.max(0, idx-3);i<Math.min(items.length, idx+4);i++){
+        const distance = idx - i;
         animations.push(
           Animated.timing(animValues.current[i], {
-            toValue: 1 - distance * 0.5,
-            duration: 500,
+            toValue: Math.max(0, 1 - distance * 0.5),
+            duration: Math.max(0, 500 - delta * delta) / 5,
             useNativeDriver: false,
+            isInteraction: false,
             easing: Easing.ease,
           }),
         );
       }
       Animated.parallel(animations, { stopTogether: false }).start();
+      snap();
     }
   };
   const onScrollEndDrag = () => {
-    console.log(activeItemIndex.current, getScrollOffset(activeItemIndex.current));
-    ref.current.scrollTo({
-      x: 0,
-      y: getScrollOffset(activeItemIndex.current),
-    });
+    snap();
   };
 
   return (
@@ -101,6 +106,7 @@ export const VerticalPicker = ({
       <ScrollArea
         ref={ref}
         scrollEventThrottle={1}
+        snapToInterval={10}
         onScroll={onScroll}
         onScrollEndDrag={onScrollEndDrag}
       >
@@ -109,25 +115,26 @@ export const VerticalPicker = ({
             key={x.value}
             style={{
               height: animValues.current[idx].interpolate({
-                inputRange: [0, 0.5, 1],
-                outputRange: [25, 30, 40],
+                inputRange: [0, 0.5, 1, 1.5, 2],
+                outputRange: [25, 30, 40, 30, 25],
               }),
               opacity: animValues.current[idx].interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.2, 1],
+                inputRange: [0, 0.5, 1, 1.5, 2],
+                outputRange: [0.2, 0.4, 1, 0.4, 0.2],
               }),
               transform: [
                 { scale: animValues.current[idx].interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [0.7, 1],
-                }) }
+                  inputRange: [0, 1, 2],
+                  outputRange: [0.7, 1, 0.7],
+                }) },
+                { rotateX: animValues.current[idx].interpolate({
+                  inputRange: [0, 1, 2],
+                  outputRange: ['30deg', '0deg', '-30deg'],
+                }) },
               ]
             }}
           >
-            <ItemText
-              style={{
-              }}
-            >
+            <ItemText>
               {x.label}
             </ItemText>
           </ItemContainer>
