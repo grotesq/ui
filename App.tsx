@@ -5,7 +5,7 @@ import { FAB } from 'atom/fab';
 import { Portal, PortalProvider, WarpTo } from 'atom/portal';
 import { Debounce } from 'atom/transition';
 import { Confirm } from 'atom/popup/Confirm';
-import { VerticalPicker } from 'atom/input';
+import { Input, VerticalPicker } from 'atom/input';
 
 export default function App() {
   const [a, setA] = useState('red');
@@ -29,17 +29,9 @@ export default function App() {
         </Debounce>
       </View>
 
-      <VerticalPicker
-        items={[
-          { label: 'qwer', value: 'qwer' },
-          { label: 'qwer23', value: 'qwer23' },
-          { label: 'qwer23', value: 'qwer2333' },
-          { label: 'qwer3124', value: 'qwer4123' },
-          { label: 'qwer31242', value: 'qwer412322' },
-          { label: 'qwer312433', value: 'qwer412333' },
-          { label: 'qwer312444', value: 'qwer412344' },
-        ]}
-        value="qwer"
+      <Input
+        variant="underlined"
+        value="ASDF"
         onChange={() => {}}
       />
     </PortalProvider>

@@ -9,7 +9,7 @@ export const InputVariant = {
   None: 'none',
   Outlined: 'outlined',
   Underlined: 'underlined',
-};
+} as const;
 export const InputKind = {
   None: 'none',
   Phone: 'phone',
@@ -47,7 +47,9 @@ export const Input = ({
   };
 
   return (
-    <Container>
+    <Container
+      variant={variant}
+    >
       <HorizontalLayout fill>
         <SInput
           value={format(value || '')}
@@ -79,6 +81,23 @@ const resolveError = (value: string, error: string | Validator<string> | undefin
 };
 
 const Container = styled.View`
+  width: 100%;
+  height: 52px;
+
+  ${({ variant }: Partial<InputProps>) => ({
+    [InputVariant.None]: `
+    `,
+    [InputVariant.Outlined]: `
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      padding: 5px 15px;
+    `,
+    [InputVariant.Underlined]: `
+      border: 0px solid #dcdcdc;
+      border-bottom-width: 1px;
+      padding: 5px 15px;
+    `,
+  }[variant!])}
 `;
 const SInput = styled.TextInput`
 `;
