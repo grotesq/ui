@@ -3,22 +3,32 @@ import { TextInputProps } from 'react-native';
 import styled from 'styled-components/native';
 
 import { formatPhone } from 'format';
+import { HorizontalLayout, Push } from 'atom/layout';
 
+export const InputVariant = {
+  None: 'none',
+  Outlined: 'outlined',
+  Underlined: 'underlined',
+};
 export const InputKind = {
   None: 'none',
   Phone: 'phone',
 } as const;
 
 interface InputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
+  variant?: ValuesOf<typeof InputVariant>;
   kind?: ValuesOf<typeof InputKind>;
   error?: string | Validator<string>;
+  right?: React.ReactNode;
   value: string;
   onChange: OnChangeCallback<string>;
 };
 export const Input = ({
+  variant = InputVariant.None,
   kind = InputKind.None,
   value,
   error,
+  right,
   onChange,
   ...props
 }: InputProps) => {
@@ -38,11 +48,20 @@ export const Input = ({
 
   return (
     <Container>
-      <SInput
-        value={format(value || '')}
-        onChangeText={onPreChange}
-        {...props}
-      />
+      <HorizontalLayout fill>
+        <SInput
+          value={format(value || '')}
+          onChangeText={onPreChange}
+          {...props}
+        />
+        {right && (
+          <>
+            <Push />
+            {right}
+          </>
+        )}
+      </HorizontalLayout>
+
       {errorMessage && (
         <ErrorText>
           {errorMessage}
