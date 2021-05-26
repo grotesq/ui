@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { FAB } from 'atom/fab';
 import { Portal, PortalProvider, WarpTo } from 'atom/portal';
 import { Debounce } from 'atom/transition';
+import { Confirm } from 'atom/popup/Confirm';
 
 export default function App() {
   const [a, setA] = useState('red');
@@ -26,6 +27,12 @@ export default function App() {
           </Text>
         </Debounce>
       </View>
+
+      <Confirm
+        title="ASDF"
+        message="WBQB"
+        onClose={() => {}}
+      />
     </PortalProvider>
   );
 }

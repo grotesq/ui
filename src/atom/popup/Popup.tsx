@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled/styled';
 import { Modal, ModalProps } from 'react-native';
 
-import { resolvePadding } from 'style';
+import { resolveMargin, resolvePadding } from 'style';
 
 type PopupProps = {
   padding?: Padding;
@@ -11,7 +11,7 @@ type PopupProps = {
   onClose: () => void;
 };
 export const Popup = ({
-  padding,
+  padding = 15,
   modalProps = {},
   children,
   onClose = () => {},
@@ -23,16 +23,28 @@ export const Popup = ({
       onRequestClose={onClose}
       {...modalProps}
     >
-      <Container
-        padding={padding}
-        {...props}
-      >
-        {children}
-      </Container>
+      <Backdrop>
+        <Container
+          padding={padding}
+          {...props}
+        >
+          {children}
+        </Container>
+      </Backdrop>
     </Modal>
   );
 };
 
+const Backdrop = styled.View`
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(0,0,0, 0.3);
+`;
 const Container = styled.View`
+  background-color: white;
+  border-radius: 10px;
+
+  ${resolveMargin('auto')}
   ${({ padding }: PopupProps) => resolvePadding(padding)}
 `;

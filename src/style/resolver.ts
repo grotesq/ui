@@ -8,29 +8,29 @@ export const resolvePadding = (padding: Padding | undefined) => {
   if (!padding) return '';
 
   if (typeof padding === 'number')
-    return `padding: ${padding}px`;
+    return `padding: ${padding}px;`;
   if (typeof padding === 'string')
-    return `padding: ${padding}`;
+    return `padding: ${padding};`;
   
   return `
-    ${padding.top ? `padding-top: ${resolveUnit(padding.top)}` : ''}
-    ${padding.right ? `padding-right: ${resolveUnit(padding.right)}` : ''}
-    ${padding.bottom ? `padding-bottom: ${resolveUnit(padding.bottom)}` : ''}
-    ${padding.left ? `padding-left: ${resolveUnit(padding.left)}` : ''}
+    ${padding.top ? `padding-top: ${resolveUnit(padding.top)};` : ''}
+    ${padding.right ? `padding-right: ${resolveUnit(padding.right)};` : ''}
+    ${padding.bottom ? `padding-bottom: ${resolveUnit(padding.bottom)};` : ''}
+    ${padding.left ? `padding-left: ${resolveUnit(padding.left)};` : ''}
   `;
 };
 export const resolveMargin = (margin: Margin | undefined) => {
   if (!margin) return '';
 
   if (typeof margin === 'number')
-    return `margin: ${margin}px`;
+    return `margin: ${margin}px;`;
   if (typeof margin === 'string')
-    return `margin: ${margin}`;
+    return `margin: ${margin};`;
   
   return `
-    ${margin.top ? `margin-top: ${resolveUnit(margin.top)}` : ''}
-    ${margin.right ? `margin-right: ${resolveUnit(margin.right)}` : ''}
-    ${margin.bottom ? `margin-bottom: ${resolveUnit(margin.bottom)}` : ''}
-    ${margin.left ? `margin-left: ${resolveUnit(margin.left)}` : ''}
+    ${margin.top ? `margin-top: ${resolveUnit(margin.top)};` : ''}
+    ${margin.right ? `margin-right: ${resolveUnit(margin.right)};` : ''}
+    ${margin.bottom ? `margin-bottom: ${resolveUnit(margin.bottom)};` : ''}
+    ${margin.left ? `margin-left: ${resolveUnit(margin.left)};` : ''}
   `;
 };
