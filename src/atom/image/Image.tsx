@@ -49,6 +49,12 @@ export const Image = ({
   );
 };
 
+const isBlurHashSimple = (x: string) => {
+  if (typeof x !== 'string') return false;
+  if (!x.startsWith('http')) return false;
+  return true;
+};
+
 const Container = styled.View`
 `;
 const PrevImage = styled.Image`
