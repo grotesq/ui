@@ -30,7 +30,7 @@ const validator = (value: string) => {
 
 Utility Components
 ----
-#### Portal
+### Portal
 
 ```tsx
 <View>
@@ -56,7 +56,7 @@ will be rendered as:
 </Portal>
 ```
 
-#### Debounce
+### Debounce
 
 ```tsx
 <Debounce
