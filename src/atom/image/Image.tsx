@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ImageProps as RNImageProps, Animated } from 'react-native';
-import { mergeStyle } from 'style';
+import { mergeStyle, resolveMargin } from 'style';
 import styled from 'styled/styled';
 
 interface ImageProps extends RNImageProps {
   placeholder: any;
+  children: React.ReactNode;
 };
 export const Image = ({
   source,
   placeholder,
+  children,
   ...props
 }: ImageProps) => {
   const opacity = useRef(new Animated.Value(0)).current;
@@ -45,6 +47,12 @@ export const Image = ({
           }),
         })}
       />
+
+      {children && (
+        <ChildrenContainer>
+          {children}
+        </ChildrenContainer>
+      )}
     </Container>
   );
 };
@@ -61,4 +69,8 @@ const PrevImage = styled.Image`
   position: absolute;
 `;
 const NextImage = styled(Animated.Image)`
+  position: absolute;
+`;
+const ChildrenContainer = styled.View`
+  ${resolveMargin('auto')}
 `;
