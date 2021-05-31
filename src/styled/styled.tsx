@@ -56,7 +56,17 @@ const aliases = [
 ] as const;
 
 const newStyled = (...params: any[]) => {
-  return styled(...params);
+  return (...p2: any[]) => {
+    const remapped = p2.map(x => {
+      if (typeof x === 'function') {
+        return transpile(x({ color: 'primary' }));
+      }
+      if (Array.isArray(x))
+        return x.map(y => transpile(y));
+      return transpile(x);
+    });
+    return styled(...params)(...remapped);
+  }
 };
 
 /* Define a getter for each alias which simply gets the reactNative component
@@ -67,8 +77,7 @@ aliases.forEach(alias =>
     configurable: false,
     get() {
       return (...params: any[]) => {
-        params[0] = params[0].map(x => transpile(x));
-        return styled((ReactNative as any)[alias])(...params);
+        return newStyled((ReactNative as any)[alias])(...params);
       };
     },
   })
