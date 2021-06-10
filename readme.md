@@ -27,6 +27,12 @@ const validator = (value: string) => {
   error={validator}
 />
 ```
+built-in validator
+```tsx
+<Input
+  error={withError(validateName, 'Incorrect name')}
+/>
+```
 
 Utility Components
 ----
